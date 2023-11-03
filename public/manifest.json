@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "chrome extension",
+  "version": "1.0",
+  "type": "module",
+  "description": "chrome extension",
+  "permissions": ["storage", "declarativeContent", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "X.png",
+        "48": "X.png",
+        "128": "X.png"
+    }
+    ,
+    "browser_action": {
+      "default_popup": "index.html",
+      "default_icon": {
+        "16": "X.png",
+        "48": "X.png",
+        "128": "X.png"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.tsx"]
+    }
+  ],
+ 
+  "web_accessible_resources": [
+    {
+      "resources": ["X.png" ,"index.html"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "script-src": ["self", "chrome-extension://ogdpconnbbeegoajbjjckohmnehkjhni"],
+    "object-src": ["self", "chrome-extension://ogdpconnbbeegoajbjjckohmnehkjhni"]
+  }
+  
+}

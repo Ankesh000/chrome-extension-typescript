@@ -1,0 +1,9 @@
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color:"rgb(100, 64, 189)";
+  padding: 20px;
+  color: white;
+  width: 320px;
+  height: 450px;
+}
