@@ -4,7 +4,7 @@ import { Typography, TextField, Grid, Button, Link } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import "./App.css";
 import logo from "./images/light-logo.png";
-import Signin from "./Signin.tsx";
+// import Signin from "./Signin.tsx";
 
 //===================================================================================================================//
 
@@ -17,8 +17,8 @@ function App() {
   
   const [isSwitchOn, setIsSwitchOn] = useState<boolean>(true);
   const [showForgotScreen, setShowForgotScreen] = useState<boolean>(false);
-  const [showSigninComponent, setShowSigninComponent] =
-    useState<boolean>(false);
+  // const [showSigninComponent, setShowSigninComponent] =
+  //   useState<boolean>(false);
 
   let label: Label = { inputProps: { "aria-label": "Size switch demo" } };
   let popupStyle: React.CSSProperties = {
@@ -38,8 +38,8 @@ function App() {
 
   const handleLoginLinkClick = () => {
     setShowForgotScreen(false);
-    setShowSigninComponent(true);
-  };
+    // setShowSigninComponent(true);
+  };  
 
   return (
     <div className="App" style={popupStyle}>
@@ -97,7 +97,7 @@ function App() {
           <Typography style={{ marginLeft: "60px", padding: "10px" }}>
             Sign in to your account
           </Typography>
-          {showSigninComponent && <Signin />}
+         
           <TextField
             id="filled-basic"
             label="Enter your email..."
