@@ -2,7 +2,6 @@
   "manifest_version": 3,
   "name": "chrome extension",
   "version": "1.0",
-  "type": "module",
   "description": "chrome extension",
   "permissions": ["storage", "declarativeContent", "activeTab", "scripting"],
   "host_permissions": ["<all_urls>"],

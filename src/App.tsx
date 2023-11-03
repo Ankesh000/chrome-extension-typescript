@@ -1,24 +1,31 @@
 // App.tsx
-
-import React from "react";
+import React, { useState } from "react";
 import { Typography, TextField, Grid, Button, Link } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import "./App.css";
 import logo from "./images/light-logo.png";
 import Signin from "./Signin.tsx";
 
-function App() {
-  const [isSwitchOn, setIsSwitchOn] = React.useState(true);
-  const [showForgotScreen, setShowForgotScreen] = React.useState(false);
-  const [showSigninComponent, setShowSigninComponent] = React.useState(false);
+//===================================================================================================================//
 
-  const label = { inputProps: { "aria-label": "Size switch demo" } };
-  const popupStyle = {
+interface Label {
+  inputProps: { "aria-label": string };
+}
+
+//===================================================================================================================//
+function App() {
+  
+  const [isSwitchOn, setIsSwitchOn] = useState<boolean>(true);
+  const [showForgotScreen, setShowForgotScreen] = useState<boolean>(false);
+  const [showSigninComponent, setShowSigninComponent] =
+    useState<boolean>(false);
+
+  let label: Label = { inputProps: { "aria-label": "Size switch demo" } };
+  let popupStyle: React.CSSProperties = {
     backgroundColor: isSwitchOn ? "rgb(100, 64, 189)" : "gray",
     transition: "background-color 0.5s",
   };
-
-  const textFieldStyle = {
+  let textFieldStyle: React.CSSProperties = {
     backgroundColor: "white",
     marginTop: "10px",
     width: "400px",

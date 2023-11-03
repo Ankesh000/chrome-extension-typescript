@@ -1,6 +1,6 @@
 // content.tsx
 /// <reference types="chrome" />
-const iconURL:string = chrome.runtime.getURL("X.png");
+const iconURL= chrome.runtime.getURL("X.png");
 console.log("iconURL:", iconURL);
 
 const iconImage = document.createElement("img");
@@ -70,7 +70,7 @@ document.addEventListener("dragover", (e) => {
 });
 
 // When restoring the icon's position from localStorage
-const storedPosition = localStorage.getItem("iconPosition");
+let storedPosition = localStorage.getItem("iconPosition");
 if (storedPosition) {
   const { top, right, bottom, left } = JSON.parse(storedPosition);
   const width = right - left;
