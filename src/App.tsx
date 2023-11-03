@@ -14,7 +14,6 @@ interface Label {
 
 //===================================================================================================================//
 function App() {
-  
   const [isSwitchOn, setIsSwitchOn] = useState<boolean>(true);
   const [showForgotScreen, setShowForgotScreen] = useState<boolean>(false);
   // const [showSigninComponent, setShowSigninComponent] =
@@ -31,16 +30,16 @@ function App() {
     width: "400px",
     borderRadius: "20px",
   };
-
-  const handleForgotLinkClick = () => {
+  const handleForgotLinkClick: () => void = () => {
     setShowForgotScreen(true);
   };
 
-  const handleLoginLinkClick = () => {
+  const handleLoginLinkClick: () => void = () => {
     setShowForgotScreen(false);
     // setShowSigninComponent(true);
-  };  
+  };
 
+  
   return (
     <div className="App" style={popupStyle}>
       {showForgotScreen ? (
@@ -97,7 +96,7 @@ function App() {
           <Typography style={{ marginLeft: "60px", padding: "10px" }}>
             Sign in to your account
           </Typography>
-         
+
           <TextField
             id="filled-basic"
             label="Enter your email..."
