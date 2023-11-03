@@ -1,9 +1,9 @@
 /// <reference types="chrome" />
 
-const iconURL: string = chrome.runtime.getURL("X.png");
+const iconURL = chrome.runtime.getURL("X.png");
 console.log("iconURL:", iconURL);
 
-const iconImage: HTMLImageElement = document.createElement("img");
+const iconImage = document.createElement("img");
 iconImage.src = iconURL;
 iconImage.style.position = "fixed";
 iconImage.style.bottom = "60px";
@@ -14,7 +14,7 @@ iconImage.style.zIndex = "9999";
 iconImage.style.cursor = "pointer";
 
 document.body.appendChild(iconImage);
-let customPopup: HTMLIFrameElement | undefined;
+let customPopup;
 
 iconImage.addEventListener("click", () => {
   if (!customPopup) {
@@ -35,11 +35,10 @@ iconImage.addEventListener("click", () => {
   }
 });
 
-let offsetX: number | undefined;
-let offsetY: number | undefined;
+let offsetX;
+let offsetY;
 
-iconImage.addEventListener("dragstart", (e: DragEvent) => {
-  console.log("Icon dragged start", e);
+iconImage.addEventListener("dragstart", (e) => {
   if (e.dataTransfer) {
     offsetX = e.clientX - iconImage.getBoundingClientRect().left;
     offsetY = e.clientY - iconImage.getBoundingClientRect().top;
@@ -49,7 +48,7 @@ iconImage.addEventListener("dragstart", (e: DragEvent) => {
   }
 });
 
-iconImage.addEventListener("drag", (e: DragEvent) => {
+iconImage.addEventListener("drag", (e) => {
   if (offsetX !== undefined && offsetY !== undefined) {
     iconImage.style.top = e.clientY - offsetY + "px";
     iconImage.style.left = e.clientX - offsetX + "px";
@@ -66,7 +65,7 @@ iconImage.addEventListener("drag", (e: DragEvent) => {
   }
 });
 
-document.addEventListener("dragover", (e: DragEvent) => {
+document.addEventListener("dragover", (e) => {
   console.log("Icon dragged", e);
   e.preventDefault();
 });
