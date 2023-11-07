@@ -1,6 +1,6 @@
+// content.tsx
 /// <reference types="chrome" />
-
-const iconURL = chrome.runtime.getURL("X.png");
+const iconURL= chrome.runtime.getURL("X.png");
 console.log("iconURL:", iconURL);
 
 const iconImage = document.createElement("img");
@@ -39,30 +39,29 @@ let offsetX;
 let offsetY;
 
 iconImage.addEventListener("dragstart", (e) => {
-  if (e.dataTransfer) {
-    offsetX = e.clientX - iconImage.getBoundingClientRect().left;
-    offsetY = e.clientY - iconImage.getBoundingClientRect().top;
-    const dragImage = new Image();
-    dragImage.src = "/X.png";
+  console.log("Icon dragged start", e);
+  offsetX = e.clientX - iconImage.getBoundingClientRect().left;
+  offsetY = e.clientY - iconImage.getBoundingClientRect().top;
+  const dragImage = new Image();
+  dragImage.src = "/X.png";
+  if (e.dataTransfer != null) {
     e.dataTransfer.setDragImage(dragImage, offsetX, offsetY);
   }
 });
 
 iconImage.addEventListener("drag", (e) => {
-  if (offsetX !== undefined && offsetY !== undefined) {
-    iconImage.style.top = e.clientY - offsetY + "px";
-    iconImage.style.left = e.clientX - offsetX + "px";
+  iconImage.style.top = e.clientY - offsetY + "px";
+  iconImage.style.left = e.clientX - offsetX + "px";
 
-    const top = e.clientY - offsetY;
-    const left = e.clientX - offsetX;
-    const right = left + iconImage.offsetWidth;
-    const bottom = top + iconImage.offsetHeight;
+  const top = e.clientY - offsetY;
+  const left = e.clientX - offsetX;
+  const right = left + iconImage.offsetWidth;
+  const bottom = top + iconImage.offsetHeight;
 
-    localStorage.setItem(
-      "iconPosition",
-      JSON.stringify({ top, right, bottom, left })
-    );
-  }
+  localStorage.setItem(
+    "iconPosition",
+    JSON.stringify({ top, right, bottom, left })
+  );
 });
 
 document.addEventListener("dragover", (e) => {
@@ -76,10 +75,7 @@ if (storedPosition) {
   const { top, right, bottom, left } = JSON.parse(storedPosition);
   const width = right - left;
   const height = bottom - top;
-  iconImage.style.setProperty(
-    "inset",
-    `${top}px ${right}px ${bottom}px ${left}px`
-  );
+  iconImage.style.inset = `${top}px ${right}px ${bottom}px ${left}px`;
   iconImage.style.width = width + "px";
   iconImage.style.height = height + "px";
 }

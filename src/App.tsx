@@ -4,8 +4,9 @@ import { Typography, TextField, Grid, Button, Link } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import "./App.css";
 import logo from "./images/light-logo.png";
-// import Signin from "./Signin.tsx";
-
+import Signin from "./pages/Signin.tsx";
+import bgImage from "./images/darkBG.png";
+import ForgotPass from "./pages/ForgotPass.tsx";
 //===================================================================================================================//
 
 interface Label {
@@ -15,77 +16,47 @@ interface Label {
 //===================================================================================================================//
 function App() {
   const [isSwitchOn, setIsSwitchOn] = useState<boolean>(true);
-  const [showForgotScreen, setShowForgotScreen] = useState<boolean>(false);
-  // const [showSigninComponent, setShowSigninComponent] =
-  //   useState<boolean>(false);
+  const [showForgotComponent, setShowForgotComponent] =
+    useState<boolean>(false);
+  const [showSigninComponent, setShowSigninComponent] =
+    useState<boolean>(false);
 
   let label: Label = { inputProps: { "aria-label": "Size switch demo" } };
-  let popupStyle: React.CSSProperties = {
-    backgroundColor: isSwitchOn ? "rgb(100, 64, 189)" : "gray",
+  const popupStyle: React.CSSProperties = {
+    backgroundImage: isSwitchOn ? `url(${bgImage})` : "gray",
     transition: "background-color 0.5s",
   };
+
   let textFieldStyle: React.CSSProperties = {
     backgroundColor: "white",
     marginTop: "10px",
     width: "400px",
     borderRadius: "20px",
   };
+
   const handleForgotLinkClick: () => void = () => {
-    setShowForgotScreen(true);
+    setShowForgotComponent(true);
   };
 
   const handleLoginLinkClick: () => void = () => {
-    setShowForgotScreen(false);
-    // setShowSigninComponent(true);
+    setShowForgotComponent(false);
   };
 
-  
+  const handleSigninLinkClick: () => void = () => {
+    setShowForgotComponent(false);
+    setShowSigninComponent(true);
+  };
+
+  const handleLogout = () => {
+    setShowSigninComponent(false);
+  };
+
   return (
     <div className="App" style={popupStyle}>
-      {showForgotScreen ? (
-        <div>
-          <img
-            style={{ width: "200px", padding: "10px" }}
-            src={logo}
-            alt="logo"
-          />
-          <Typography style={{ padding: "10px" }}>Reset password</Typography>
-          <Grid style={{ marginTop: "40px" }}>
-            <TextField
-              id="filled-basic"
-              label="Enter your email..."
-              variant="filled"
-              style={{
-                backgroundColor: "white",
-                width: "300px",
-                borderRadius: "20px",
-                marginTop: "10px",
-              }}
-            />
-            <Button
-              style={{
-                backgroundColor: "white",
-                width: "300px",
-                height: "40px",
-                marginTop: "20px",
-                borderRadius: "20px",
-                fontWeight: "bold",
-                color: "rgb(100, 64, 189)",
-              }}
-            >
-              Send password reset link
-            </Button>
-            <Typography style={{ marginTop: "20px" }}>
-              or return back to {"  "}
-              <Link
-                onClick={handleLoginLinkClick}
-                style={{ color: "white", cursor: "pointer" }}
-              >
-                Log in
-              </Link>
-            </Typography>
-          </Grid>
-        </div>
+      {showForgotComponent ? (
+        <ForgotPass onLogin={handleLoginLinkClick} />
+      ) : showSigninComponent ? (
+        <Signin onLogout={handleLogout} />
       ) : (
         <Grid container>
           <img
@@ -101,7 +72,12 @@ function App() {
             id="filled-basic"
             label="Enter your email..."
             variant="filled"
-            style={textFieldStyle}
+            sx={{
+              backgroundColor: "white",
+              marginTop: "10px",
+              width: "400px",
+              borderRadius: "20px",
+            }}
           />
           <div
             style={{ marginLeft: "260px", marginTop: "10px", fontSize: "14px" }}
@@ -136,6 +112,7 @@ function App() {
               Sign Up
             </Link>
             <Button
+              onClick={handleSigninLinkClick}
               style={{
                 backgroundColor: "white",
                 width: "130px",
